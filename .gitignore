@@ -1,0 +1,6 @@
+*.d
+*.o
+dist
+dist/*
+nbproject
+nbproject/*
