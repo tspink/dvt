@@ -89,6 +89,14 @@ inline unsigned int read_uleb128(char **pp)
 
 static inline int valid_magic(struct dex_header *header)
 {
+	const char magic[] = {0x64, 0x65, 0x78, 0x0a, 0x30, 0x33, 0x35, 0x00};
+	int i;
+	
+	for (i = 0; i < sizeof(header->magic); i++) {
+		if (header->magic[i] != magic[i])
+			return 0;
+	}
+	
 	return 1;
 }
 
@@ -130,16 +138,21 @@ int dvt_parse_dex(struct dvt *dvt, struct dex_file *file)
 		return -1;
 	}
 	
-	if (header->header_size != sizeof(*header)) {
-		err("dex: header size incorrect\n");
-		return -1;
-	}
-	
 	if (header->endian_tag != ENDIAN_TAG) {
 		err("dex: unsupported endianness\n");
 		return -1;
 	}
 
+	if (header->header_size != sizeof(*header)) {
+		err("dex: header size incorrect\n");
+		return -1;
+	}
+	
+	if (header->file_size != file->raw.size) {
+		err("dex: stated file size does not match loaded file size\n");
+		return -1;
+	}
+	
 	dbg("checksum: %x, file_size: %x, header_size: %x (%x), endian: %x\n", header->checksum, header->file_size, header->header_size, sizeof(*header), header->endian_tag);
 
 	return dex_read_methods(header);
