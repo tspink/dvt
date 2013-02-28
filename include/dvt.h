@@ -1,7 +1,12 @@
 #ifndef __DVT_H__
 #define __DVT_H__
 
-#include <stdlib.h>
+#include <stdio.h>
+
+#define dbg(a...) fprintf(stderr, "debug: " a)
+#define info(a...) fprintf(stderr, "info: " a)
+#define warn(a...) fprintf(stderr, "warning: " a)
+#define err(a...) fprintf(stderr, "error: " a)
 
 struct memv {
 	void *base;

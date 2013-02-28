@@ -19,11 +19,13 @@ struct dvt *dvt_create_context_file(const char *file)
 	
 	fd = open(file, O_RDONLY);
 	if (fd < 0) {
+		err("context: unable to open input file\n");
 		return NULL;
 	}
 	
 	rc = fstat(fd, &stat);
 	if (rc < 0) {
+		err("context: unable to stat input file\n");
 		close(fd);
 		return NULL;
 	}
@@ -32,6 +34,7 @@ struct dvt *dvt_create_context_file(const char *file)
 	close(fd);
 	
 	if (!base) {
+		err("context: unable to mmap input file\n");
 		return NULL;
 	}
 	
@@ -48,8 +51,10 @@ struct dvt *dvt_create_context_memory(void *base, unsigned int size)
 	struct dvt *dvt;
 	
 	dvt = dvt_alloc(sizeof(*dvt), DVT_ALLOC_NONE);
-	if (!dvt)
+	if (!dvt) {
+		err("context: unable to allocate storage for context object\n");
 		return NULL;
+	}
 	
 	dvt->raw.base = base;
 	dvt->raw.size = size;
