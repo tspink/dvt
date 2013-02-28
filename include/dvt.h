@@ -13,9 +13,13 @@ struct memv {
 	unsigned int size;
 };
 
-struct dvt {
+struct dex_file {
 	struct memv raw;
-	int mapped;
+};
+
+struct dvt {
+	struct dex_file *files;
+	int nr_files;
 };
 
 enum dvt_alloc_flags {
@@ -26,8 +30,9 @@ enum dvt_alloc_flags {
 extern void *dvt_alloc(unsigned int size, enum dvt_alloc_flags flags);
 extern void dvt_free(void *ptr);
 
-extern struct dvt *dvt_create_context_file(const char *file);
-extern struct dvt *dvt_create_context_memory(void *base, unsigned int size);
+extern struct dvt *dvt_create_context(void);
 extern void dvt_destroy(struct dvt *dvt);
+
+extern int dvt_dex_load_file(struct dvt *dvt, const char *path);
 
 #endif

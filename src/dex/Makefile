@@ -1,2 +1,1 @@
-obj-y := parse.o
-	
+obj-y := parse.o file.o

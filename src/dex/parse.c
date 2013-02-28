@@ -121,9 +121,9 @@ static int dex_read_methods(struct dex_header *header)
 	return -1;
 }
 
-int dvt_parse_dex(struct dvt *dvt)
+int dvt_parse_dex(struct dvt *dvt, struct dex_file *file)
 {
-	struct dex_header *header = (struct dex_header *)dvt->raw.base;
+	struct dex_header *header = (struct dex_header *)file->raw.base;
 
 	if (!valid_magic(header)) {
 		err("dex: invalid magic number\n");
