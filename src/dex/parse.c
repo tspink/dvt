@@ -20,15 +20,27 @@ static inline int valid_magic(struct dex_header *header)
 	return 1;
 }
 
+static int load_class(struct dvt *dvt, struct dex_header *header, struct class_def_item *class)
+{
+	struct type_id_item *type = get_type_id_item(header, class->class_idx);
+
+	dbg("loading class: %s\n", get_string_data(header, type->descriptor_idx));
+
+	return -1;
+}
+
 static int load_classes(struct dvt *dvt, struct dex_header *header)
 {
-	int i;
+	int i, rc;
 
 	for (i = 0; i < header->class_defs.size; i++) {
 		struct class_def_item *class = get_class_def_item(header, i);
-		struct type_id_item *type = get_type_id_item(header, class->class_idx);
 
-		dbg("class: %s\n", get_string_data(header, type->descriptor_idx));
+		rc = load_class(dvt, header, class);
+		if (rc) {
+			err("dex: failed to load class\n");
+			return rc;
+		}
 	}
 
 	return -1;

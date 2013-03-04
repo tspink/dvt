@@ -64,7 +64,7 @@ struct class_def_item {
 	unsigned int static_values_off;
 };
 
-static inline unsigned int read_uleb128(char **pp)
+__attribute__((used)) static inline unsigned int read_uleb128(char **pp)
 {
 	unsigned int total = 0;
 	char *p = *pp;
@@ -79,37 +79,37 @@ static inline unsigned int read_uleb128(char **pp)
 	return total;
 }
 
-static inline struct string_id_item *get_string_id_item(struct dex_header *header, unsigned int index)
+__attribute__((used)) static inline struct string_id_item *get_string_id_item(struct dex_header *header, unsigned int index)
 {
 	return &((struct string_id_item *)((char *)header + header->string_ids.offset))[index];
 }
 
-static inline struct type_id_item *get_type_id_item(struct dex_header *header, unsigned int index)
+__attribute__((used)) static inline struct type_id_item *get_type_id_item(struct dex_header *header, unsigned int index)
 {
 	return &((struct type_id_item *)((char *)header + header->type_ids.offset))[index];
 }
 
-static inline struct proto_id_item *get_proto_id_item(struct dex_header *header, unsigned int index)
+__attribute__((used)) static inline struct proto_id_item *get_proto_id_item(struct dex_header *header, unsigned int index)
 {
 	return &((struct proto_id_item *)((char *)header + header->proto_ids.offset))[index];
 }
 
-static inline struct field_id_item *get_field_id_item(struct dex_header *header, unsigned int index)
+__attribute__((used)) static inline struct field_id_item *get_field_id_item(struct dex_header *header, unsigned int index)
 {
 	return &((struct field_id_item *)((char *)header + header->field_ids.offset))[index];
 }
 
-static inline struct method_id_item *get_method_id_item(struct dex_header *header, unsigned int index)
+__attribute__((used)) static inline struct method_id_item *get_method_id_item(struct dex_header *header, unsigned int index)
 {
 	return &((struct method_id_item *)((char *)header + header->method_ids.offset))[index];
 }
 
-static inline struct class_def_item *get_class_def_item(struct dex_header *header, unsigned int index)
+__attribute__((used)) static inline struct class_def_item *get_class_def_item(struct dex_header *header, unsigned int index)
 {
 	return &((struct class_def_item *)((char *)header + header->class_defs.offset))[index];
 }
 
-static char *get_string_data(struct dex_header *header, unsigned int index)
+__attribute__((used)) static char *get_string_data (struct dex_header *header, unsigned int index)
 {
 	struct string_id_item *str;
 	char *string_item;
