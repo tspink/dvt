@@ -35,4 +35,23 @@ extern void dvt_destroy(struct dvt *dvt);
 
 extern int dvt_dex_load_file(struct dvt *dvt, const char *path);
 
+struct dvt_class {
+	struct dvt *ctx;
+};
+
+struct dvt_method {
+	struct dvt_class *class;
+};
+
+typedef enum _find_flags {
+	F_NONE			= 0,
+	F_STATIC		= 1,
+	F_PUBLIC		= 2,
+	F_PRIVATE		= 4,
+} find_flags_t;
+
+extern struct dvt_class *dvt_find_class(struct dvt *dvt, const char *name);
+extern struct dvt_method *dvt_find_method(struct dvt_class *class, const char *sig, find_flags_t flags);
+extern void *dvt_invoke(struct dvt_method *method, void **args);
+
 #endif
