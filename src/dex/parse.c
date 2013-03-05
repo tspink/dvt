@@ -26,7 +26,9 @@ static int load_class(struct dvt *dvt, struct dex_header *header, struct class_d
 
 	dbg("loading class: %s\n", get_string_data(header, type->descriptor_idx));
 
-	return -1;
+	dvt_install_class(dvt, NULL, get_string_data(header, type->descriptor_idx));
+
+	return 0;
 }
 
 static int load_classes(struct dvt *dvt, struct dex_header *header)
@@ -43,7 +45,7 @@ static int load_classes(struct dvt *dvt, struct dex_header *header)
 		}
 	}
 
-	return -1;
+	return 0;
 }
 
 int dvt_parse_dex(struct dvt *dvt, struct dex_file *file)

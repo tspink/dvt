@@ -8,7 +8,26 @@
 
 struct dvt_method *dvt_find_method(struct dvt_class *class, const char *sig, find_flags_t flags)
 {
+	struct dvt_method *m;
+
+	foreach(m, class->methods) {
+		dbg("method\n");
+	}
+
 	return NULL;
+}
+
+struct dvt_method *dvt_install_method(struct dvt_class *class)
+{
+	struct dvt_method *method;
+
+	method = dvt_alloc(sizeof(*method), DVT_ALLOC_ZERO);
+	if (!method)
+		return NULL;
+
+	method->class = class;
+
+	ll_insert_head(&class->methods, method);
 }
 
 void *dvt_invoke(struct dvt_method *method, void **args)
