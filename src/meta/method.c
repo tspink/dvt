@@ -11,13 +11,13 @@ struct dvt_method *dvt_find_method(struct dvt_class *class, const char *sig, fin
 	struct dvt_method *m;
 
 	foreach(m, class->methods) {
-		dbg("method\n");
+		dbg("method %s\n", m->name);
 	}
 
 	return NULL;
 }
 
-struct dvt_method *dvt_install_method(struct dvt_class *class)
+struct dvt_method *dvt_install_method(struct dvt_class *class, char *name, int flags)
 {
 	struct dvt_method *method;
 
@@ -26,6 +26,8 @@ struct dvt_method *dvt_install_method(struct dvt_class *class)
 		return NULL;
 
 	method->class = class;
+	method->name = name;
+	method->flags = flags;
 
 	ll_insert_head(&class->methods, method);
 }

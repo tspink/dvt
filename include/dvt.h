@@ -74,14 +74,19 @@ extern int dvt_dex_load_file(struct dvt *dvt, const char *path);
 struct dvt_method;
 struct dvt_class {
 	struct dvt *ctx;
+	int index;
+	
 	struct dvt_class *base;
 	char *name;
-
 	struct ll *methods;
 };
 
 struct dvt_method {
 	struct dvt_class *class;
+	int index;
+	
+	char *name;
+	int flags;
 };
 
 typedef enum _find_flags {
