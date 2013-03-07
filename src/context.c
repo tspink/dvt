@@ -9,6 +9,7 @@
 struct dvt *dvt_create_context()
 {
 	struct dvt *dvt;
+	int rc;
 	
 	dvt = dvt_alloc(sizeof(*dvt), DVT_ALLOC_ZERO);
 	if (!dvt) {

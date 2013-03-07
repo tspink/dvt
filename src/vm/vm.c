@@ -24,7 +24,7 @@ static int init_root_object(struct dvt *dvt)
 
 int vm_init(struct dvt *dvt)
 {
-	init_root_object();
+	init_root_object(dvt);
 	
 	return 0;
 }
