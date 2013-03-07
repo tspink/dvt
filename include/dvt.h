@@ -100,4 +100,8 @@ extern struct dvt_class *dvt_find_class(struct dvt *dvt, const char *name);
 extern struct dvt_method *dvt_find_method(struct dvt_class *class, const char *sig, find_flags_t flags);
 extern void *dvt_invoke(struct dvt_method *method, void **args);
 
+#ifdef __DVT_PRIVATE__
+#include "dvt-private.h"
+#endif
+
 #endif

@@ -16,10 +16,17 @@ struct dvt *dvt_create_context()
 		return NULL;
 	}
 	
+	rc = vm_init(dvt);
+	if (rc) {
+		dvt_free(dvt);
+		return NULL;
+	}
+	
 	return dvt;
 }
 
 void dvt_destroy(struct dvt *dvt)
 {
+	vm_exit(dvt);
 	dvt_free(dvt);
 }

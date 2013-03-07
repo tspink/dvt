@@ -11,7 +11,7 @@ clean:		default-clean
 PHONY += all default clean
 
 # Basic Variables
-export EXTRA_C_FLAGS	:= -g -O0
+export EXTRA_C_FLAGS	:= -g -O0 -D__DVT_PRIVATE__
 export EXTRA_LD_FLAGS	:= 
 export Q		:= @
 export ARCH		?= $(shell uname -m)
